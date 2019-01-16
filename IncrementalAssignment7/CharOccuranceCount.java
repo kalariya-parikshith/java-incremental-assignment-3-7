@@ -4,7 +4,7 @@ import java.io.File;
 
 class CharOccuranceCount{
 	public static void main(String[] args) throws Exception{
-		FileReader fr = new FileReader("input.txt");
+		FileReader fr = new FileReader(args[0]);
 		File file = new File("output.txt");
 		FileWriter fw = new FileWriter(file, false);
 		int[] charCount = new int[256];
