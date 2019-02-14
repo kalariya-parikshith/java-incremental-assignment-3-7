@@ -1,22 +1,40 @@
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.logging.Logger;
 
 class CheckPattern {
+	private static Logger logger = Logger.getLogger("checkPattern log");
+	private static final Pattern pattern = Pattern.compile("[A-Z].*[.]");
+
+	/**
+	 * checks if the given sentence matches with required pattern
+	 * 
+	 * @param 	sentence input string to be checked against pattern
+	 * 
+	 * @throws 	NullPointerException if the given sentence in the argument
+	 * 			is null.
+	 * @return 	true 	if sentence matches with the pattern
+	 * 			false	else
+	 */
+	public static boolean isPatternMatched(String sentence) throws NullPointerException {
+		Matcher matcher = pattern.matcher(sentence);
+		return matcher.matches();
+	}
+
 	public static void main(String[] args) {
-		Pattern pattern = Pattern.compile("[A-Z].*.");
-		String sentence1 = new String("Ab.");
-		String sentence2 = new String("ab.");
-		Matcher matcher1 = pattern.matcher(sentence1);
-		Matcher matcher2 = pattern.matcher(sentence2);
-		if(matcher1.matches()){
-			System.out.println("First sentence matches");
-		} else {
-			System.out.println("First sentence doesn't matches");
-		}
-		if(matcher2.matches()){
-			System.out.println("Second sentence matches");
-		} else {
-			System.out.println("Second sentence doesn't matches");
+
+		String[] testSentences = {"Ab.", "ab.", "Abc", "abc.", "a.", "A.", ".", "", null};
+
+		for(String sentence: testSentences) {
+			try {
+				if(isPatternMatched(sentence)) {
+					logger.info("'"+sentence+"' matches as per the pattern");
+				} else {
+					logger.info("'"+sentence+"' doesn't match as per the pattern");
+				}
+			} catch(NullPointerException e) {
+				logger.info("null was passed as argument to isPatternMatched method");
+			}
 		}
 	}
 }
