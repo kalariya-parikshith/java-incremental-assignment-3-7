@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 class CheckPattern {
 	private static Logger logger = Logger.getLogger("checkPattern log");
-	private static final Pattern pattern = Pattern.compile("[A-Z].*[.]");
+	private static final Pattern pattern = Pattern.compile("^[A-Z].*[.]$");
 
 	/**
 	 * checks if the given sentence matches with required pattern
@@ -23,7 +23,7 @@ class CheckPattern {
 
 	public static void main(String[] args) {
 
-		String[] testSentences = {"Ab.", "ab.", "Abc", "abc.", "a.", "A.", ".", "", null};
+		String[] testSentences = {"Ab.", "ab.", "Abc", "abc.", "a.", "A.", "aB.a", ".", "", null};
 
 		for(String sentence: testSentences) {
 			try {
